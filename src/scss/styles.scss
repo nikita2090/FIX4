@@ -1,0 +1,417 @@
+@import "lib/smart-grid";
+@import "lib/colors";
+
+@include reset();
+
+@mixin noBorderOutline {
+    outline: none;
+    border: none;
+}
+
+/*.grid_debug {
+    @include debug(rgba(0, 0, 0, 0.2), 1px solid #ff0);
+}*/
+
+@font-face {
+    font-family: Blacker, serif;
+    src: url(../fonts/Blacker-Text-Heavy-Italic-trial.ttf);
+}
+
+@font-face {
+    font-family: RalewayRegular;
+    src: url(../fonts/Raleway-Regular.otf);
+    src: url(../fonts/Raleway-Regular.ttf);
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: RalewayExtraLight;
+    src: url(../fonts/Raleway-ExtraLight.otf);
+    src: url(../fonts/Raleway-ExtraLight.ttf);
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background: $blue;
+    font-family: RalewayRegular, sans-serif;
+    color: white;
+}
+
+.container {
+    @include wrapper();
+
+    .row {
+        @include row-flex();
+    }
+}
+
+.hide {
+    display: none;
+}
+
+.addedContent {
+    opacity: 0;
+}
+
+.fadeIn {
+    opacity: 1;
+    transition: all 0.2s linear;
+}
+
+.fadeOut {
+    opacity: 0;
+    transition: all 0.2s linear;
+}
+
+.main, .logIn, .operations {
+    .row {
+        justify-content: center;
+    }
+}
+
+.mainContent, .logInContent, .operHeadings {
+    @include col();
+    @include size(12);
+    text-align: center;
+    &__title {
+        margin-top: 200px;
+        font-family: Blacker, serif;
+        font-size: 55px;
+        font-weight: bold;
+
+        @include lg-block() {
+            margin-top: 170px;
+            font-size: 45px;
+        }
+    ;
+
+        @include md-block() {
+            margin-top: 150px;
+            font-size: 40px;
+        }
+    ;
+
+        @include sm-block() {
+            margin-top: 120px;
+            font-size: 38px;
+        }
+    ;
+    }
+
+    &__subtitle {
+        margin-top: 8px;
+
+        font-family: RalewayRegular, sans-serif;
+        font-size: 20px;
+        color: $yellow;
+
+        @include md-block() {
+            font-size: 18px;
+        }
+    ;
+    }
+}
+
+.mainContent {
+    &__description {
+        @include col();
+        @include size(8);
+        @include shift(2);
+        margin-top: 16px;
+
+        text-align: center;
+        font-family: RalewayExtraLight, sans-serif;
+        font-size: 18px;
+
+        @include sm-block() {
+            @include size(10);
+            @include shift(1);
+
+            font-size: 16px;
+        }
+    ;
+
+        @include xs-block() {
+            @include size(12);
+            @include shift(0);
+
+            font-size: 16px;
+        }
+    ;
+    }
+
+    &__btn {
+        @include col();
+        @include size(4);
+        margin-top: 20px;
+
+        @include noBorderOutline();
+        background: $lightOrange;
+        height: 40px;
+        border-radius: 20px;
+        color: white;
+        font-size: 18px;
+
+        font-family: RalewayRegular, sans-serif;
+
+        @include md-block() {
+            @include size(6);
+        }
+    ;
+
+        @include xs-block() {
+            @include size(10);
+        }
+    ;
+
+        &:hover {
+            background: $orange;
+            color: whitesmoke;
+        }
+    }
+}
+
+.logInForm {
+    margin-top: 15px;
+    text-align: center;
+
+    &__name, &__password, &__submit {
+        @include noBorderOutline();
+        margin-bottom: 10px;
+        margin-top: 5px;
+
+        width: 300px;
+        height: 30px;
+        border-radius: 15px;
+        text-align: center;
+
+        @include xs-block() {
+            width: 250px;
+        }
+    ;
+    }
+
+    &__submit {
+        margin-top: 20px;
+
+        background: $lightGreen;
+        color: white;
+
+        &:hover {
+            background: $green;
+        }
+
+        &:disabled {
+            background: lightgrey;
+            color: dimgrey;
+        }
+    }
+}
+
+.operHeadings {
+    &__title {
+        margin-top: 10px;
+
+        @include lg-block() {
+            margin-top: 20px;
+            font-size: 45px;
+        }
+    ;
+
+        @include md-block() {
+            margin-top: 30px;
+            font-size: 40px;
+        }
+    ;
+
+        @include sm-block() {
+            margin-top: 30px;
+            font-size: 38px;
+        }
+    ;
+    }
+
+    &__subtitle {
+        margin-bottom: 15px;
+    }
+}
+
+.operLeft {
+    @include col-float();
+    @include size(6);
+    @include sm-block() {
+        display: none;
+    }
+
+    background: white;
+    color: #464646;
+}
+
+.operLeftСontent {
+    padding: 25px 25px;
+
+    &__heading {
+        color: $orange;
+        font-size: 20px;
+    }
+
+    &__operName {
+        margin-top: 10px;
+        font-size: 18px;
+    }
+
+    &__operText {
+        margin-top: 10px;
+
+        font-size: 16px;
+        line-height: 40px;
+        font-family: RalewayExtraLight, sans-serif;
+    }
+}
+
+.operRight {
+    @include col-float();
+    @include size(6);
+    @include size-sm(12);
+    background: $darkOrange;
+}
+
+.operRightContent {
+    margin: 40px 25px 25px;
+    text-align: center;
+
+    &__input {
+        margin-bottom: 5px;
+
+        height: 30px;
+        width: 240px;
+        border-radius: 15px;
+        @include noBorderOutline();
+        background: white;
+        text-align: center;
+        font-family: Blacker, serif;
+
+        @include xs-block() {
+            width: 200px;
+        }
+    ;
+    }
+
+    &__warning {
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+
+    &__add {
+        height: 30px;
+        width: 240px;
+        border-radius: 15px;
+        @include noBorderOutline();
+        background: $yellow;
+
+        @include xs-block() {
+            width: 200px;
+        }
+    ;
+    }
+
+    &__table {
+        margin: 0 auto 30px;
+        border: 2px solid white;
+
+        & .sortBtn:hover {
+            cursor: pointer;
+        }
+
+        & tr {
+            border: 2px solid white;
+
+            &:nth-child(even) {
+                background: $lightOrange
+            }
+
+            & td, & th {
+                padding: 10px 15px;
+                text-align: center;
+                border: 2px solid white;
+            }
+
+            &.painted {
+                background: $green;
+
+                &:nth-child(even) {
+                    background: $lightGreen;
+                }
+            }
+        }
+    }
+
+    &__filter {
+        @include noBorderOutline();
+        text-align: center;
+        width: 240px;
+        height: 30px;
+        border-radius: 15px;
+
+        @include xs-block() {
+            width: 200px;
+        }
+    ;
+    }
+
+    &__result {
+        background: $blue !important;
+    }
+}
+
+.operRightButtons {
+    margin: 25px;
+    text-align: center;
+
+    &__btn {
+        height: 30px;
+        width: 120px;
+        @include noBorderOutline();
+        border-radius: 15px;
+        background: $darkBlue;
+        color: white;
+        text-align: center;
+        font-family: RalewayRegular, sans-serif;
+
+        &:hover {
+            background: #41646e;
+        }
+
+        &:disabled {
+            background: lightgrey;
+            color: dimgrey;
+            font-weight: normal;
+
+            &:hover {
+                background: lightgrey;
+            }
+        }
+
+        @include xs-block() {
+            width: 100px;
+        }
+    ;
+    }
+
+    &__bigBtn {
+        width: 240px;
+
+        @include xs-block() {
+            width: 200px;
+        }
+    ;
+    }
+}
+
+
+
+
+
+

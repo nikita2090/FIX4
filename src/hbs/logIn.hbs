@@ -1,0 +1,33 @@
+<section class="logIn">
+    <div class="container">
+        <div class="row">
+            <div class="logInContent">
+                <h1 class="logInContent__title">
+                    {{title}}
+                </h1>
+
+                <h3 class="logInContent__subtitle">
+                    {{subtitle}}
+                </h3>
+            </div>
+
+            <form class="logInForm">
+                <label for="name">Введите email</label><br>
+                <input class='logInForm__name' id="name"
+                       type="email" placeholder="Имя" required><br>
+
+                <label for="password">Введите пароль</label><br>
+                <input class='logInForm__password' id="password"
+                       type="password" placeholder="Пароль" required><br>
+
+                <input class="logInForm__submit js-logInForm__submit"
+                       type="button" value="{{btnName}}" disabled>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+
+
+
