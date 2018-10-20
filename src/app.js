@@ -68,7 +68,8 @@ function submitHandler() {
         resizeBtnSize: 'small',
         showBtnsArr: [operationsPage.nextBtn],
         disableBtnsArr: [operationsPage.prevBtn, operationsPage.nextBtn]
-    }).render();
+    });
+    dataInput.render();
 
     dataInput.addPlusBtnListener();
 

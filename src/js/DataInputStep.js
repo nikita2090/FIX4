@@ -3,18 +3,20 @@ import Step from "./Step";
 export default class DataInputStep extends Step {
     constructor(options) {
         super(options);
-        this.plusBtn = null;
-
-        //this.addBtnHandler = this.addBtnHandler.bind(this);
+        //this.plusBtn = document.querySelector('.js-add');
+        this.addBtnHandler = this.addBtnHandler.bind(this);
     }
 
     addPlusBtnListener() {
         this.plusBtn = document.querySelector('.js-add');
-        this.plusBtn.addEventListener('click', this.addBtnHandler);
+        this.plusBtn.addEventListener('click', () => {
+            this.addBtnHandler();
+        });
     }
 
     addBtnHandler() {
-
+        console.log(this);
+        console.log(this.plusBtn);
         this._createInputRow(this.plusBtn);
     }
 
