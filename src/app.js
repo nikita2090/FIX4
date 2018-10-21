@@ -2,7 +2,6 @@ import './scss/styles.scss'
 import './js/handlebars.runtime.js';
 
 import tmp from './js/templates';
-//import Page from './js/Page';
 import Step from './js/Step';
 import Button from './js/Button';
 import Animation from './js/Animation';
@@ -14,64 +13,19 @@ import OperationsPage from './js/OperationsPage';
 import DataInputStep from './js/DataInputStep';
 
 
-let mainPage = new MainPage({
-    pageTitle: 'Сумматор',
-    template: tmp.main,
-    title: 'Сумматор',
-    subtitle: 'Удобное сложение целых чисел',
-    description: 'Сумматор помогает складывать любое количество целых чисел одновременно' +
-    ' и сортировать их перед сложением. Попробуйте прямо сейчас!',
-    btnName: 'Хочу суммировать',
-});
-mainPage.render();
-
+let mainPage = new MainPage();
 mainPage.addBtnListener(mainBtnHandler);
 
 function mainBtnHandler() {
-    let loginPage = new LoginPage({
-        pageTitle: 'Сумматор|Вход',
-        template: tmp.logIn,
-        title: 'Сумматор',
-        subtitle: 'Вход',
-        btnName: 'Войти',
-    });
-    loginPage.render();
-    loginPage.addInputListeners();
+    let loginPage = new LoginPage();
     loginPage.addSubmitListener(submitHandler);
 }
 
 function submitHandler() {
-    let operationsPage = new OperationsPage({
-        pageTitle: 'Ввод данных',
-        template: tmp.operations,
-        title: 'Сумматор',
-        subtitle: 'Удобное сложение целых чисел'
-    });
-    operationsPage.render();
-
+    let operationsPage = new OperationsPage();
     //let operRightContent = document.querySelector('.js-operRightContent');
-
-    operationsPage.addPrevBtnHandler(prevHandler);
-    operationsPage.addNextBtnHandler(nextHandler);
-
-    //renderDataInput();
-
-    operationsPage.renderTitle('Ввод данных');
-    let dataInput = new DataInputStep({
-        //email: loginPage.email,
-        stepFlag: 'dataInput',
-        leftSideTemplate: tmp.operLeftSide,
-        rightSideTemplate: tmp.dataInput,
-        renameBtnElem: operationsPage.prevBtn,
-        renameBtnName: 'Назад',
-        resizeBtnElem: operationsPage.prevBtn,
-        resizeBtnSize: 'small',
-        showBtnsArr: [operationsPage.nextBtn],
-        disableBtnsArr: [operationsPage.prevBtn, operationsPage.nextBtn]
-    });
-    dataInput.render();
-
-    dataInput.addPlusBtnListener();
+    operationsPage.addControlHandlers(prevHandler, nextHandler);
+    renderDataInput();
 
     function prevHandler() {
         let addedContent = document.querySelector('.addedContent');
@@ -96,91 +50,11 @@ function submitHandler() {
     }
 
     function renderDataInput() {
-        //operFlag = 'dataInput';
-
-
-        /*let addBtn = document.querySelector('.js-add');
-        addBtn.addEventListener('click', addBtnHandler);*/
-
-        /*let inputs = document.getElementsByClassName('js-numInput');
-        operRightContent.addEventListener('input', inputsHandler);
-        inputs[0].focus();
-
-        /*function addBtnHandler() {
-            createInputRow(addBtn);
-
-            function createInputRow(el) {
-                let div = document.createElement('div');
-                createInput(div);
-                createWarning(div);
-                el.before(div);
-
-                function createInput(elem) {
-                    let input = document.createElement('input');
-                    input.classList.add('operRightContent__input', 'js-numInput');
-                    elem.append(input);
-                }
-
-                function createWarning(elem) {
-                    let div = document.createElement('div');
-                    div.classList.add('operRightContent__warning');
-                    elem.append(div);
-                }
-            }
-        }*/
-
-        /*function inputsHandler(e) {
-            let target = e.target;
-            if (target.classList.contains('js-numInput')) {
-                Button.disable([operationsPage.nextBtn]);
-
-                if (isCorrectInputs()) {
-                    saveNumbers();
-                } else {
-                    return;
-                }
-
-                if (isTwoOrMoreNum()) {
-                    Button.enable([operationsPage.nextBtn]);
-                }
-            }
-        }
-
-        function isCorrectInputs() {
-            let isCorrect = true;
-            for (let input of inputs) {
-                let warning = input.nextSibling;
-                if (isNaN(input.value) || input.value < 0 || isNotFloat(input.value)) {
-                    warning.innerHTML = 'Введите целое положительное число';
-                    isCorrect = false;
-                } else {
-                    warning.innerHTML = '';
-                }
-            }
-            return isCorrect;
-
-            function isNotFloat(num) {
-                return Math.ceil(num) - num > 0
-            }
-        }
-
-        function isTwoOrMoreNum() {
-            return !(operationsPage.numbers.length < 2);
-        }
-
-        function saveNumbers() {
-            operationsPage.numbers = [];
-            let inputs = document.querySelectorAll('.js-numInput');
-            for (let input of inputs) {
-                if (input.value !== '') {
-                    let value = Number(input.value).toFixed();
-                    numbers.push(value);
-                }
-            }
-        }*/
+        operationsPage.renderTitle('Ввод данных');
+        new DataInputStep(operationsPage);
     }
 
-    /*function renderConfirmData() {
+    function renderConfirmData() {
         //operFlag = 'confirmData';
         operationsPage.renderTitle('Подтверждение данных');
         let confirmData = new Step({
@@ -313,7 +187,7 @@ function submitHandler() {
                 }
             }
         }
-    }*/
+    }
 }
 
 
