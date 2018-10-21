@@ -1,18 +1,13 @@
 import './scss/styles.scss'
 import './js/handlebars.runtime.js';
-
-import tmp from './js/templates';
-import Step from './js/Step';
-import Button from './js/Button';
-import Animation from './js/Animation';
-import Table from './js/Table';
-
 import MainPage from './js/MainPage';
 import LoginPage from './js/LoginPage';
 import OperationsPage from './js/OperationsPage';
 import DataInputStep from './js/DataInputStep';
 import ConfirmDataStep from './js/ConfirmDataStep';
-
+import CalculationStep from "./js/CalculationStep";
+import ResultStep from "./js/ResultStep";
+import Animation from './js/Animation';
 
 let mainPage = new MainPage();
 mainPage.addBtnListener(mainBtnHandler);
@@ -50,6 +45,7 @@ function mainBtnHandler() {
 
         function renderDataInput() {
             operationsPage.renderTitle('Ввод данных');
+            operationsPage.operFlag = 'dataInput';
             new DataInputStep(operationsPage);
         }
 
@@ -60,70 +56,15 @@ function mainBtnHandler() {
         }
 
         function renderCalculation() {
-            //operFlag = 'calculation';
             operationsPage.renderTitle('Расчет');
-            let calculation = new Step({
-                //email: loginPage.email,
-                stepFlag: 'calculation',
-                leftSideTemplate: tmp.operLeftSide,
-                rightSideTemplate: tmp.calculate,
-                hideBtnsArr: [operationsPage.prevBtn, operationsPage.nextBtn]
-            }).render();
-
-            setTimeout(function () {
-                renderResult();
-            }, 2000);
-
-            operationsPage.sumResult = 0;
-            operationsPage.sumResult = calculate(numbers);
-
-            function calculate(numbersArr) {
-                let result = 0;
-                for (let number of numbersArr) {
-                    number = Number(number);
-                    result += number;
-                }
-                return result;
-            }
+            let calculation = new CalculationStep(operationsPage);
+            calculation.onNextPage(renderResult, 2000);
         }
 
         function renderResult() {
-            //operFlag = 'result';
+            operationsPage.operFlag = 'result';
             operationsPage.renderTitle('Результат');
-            let result = new Step({
-                //email: loginPage.email,
-                stepFlag: 'result',
-                leftSideTemplate: tmp.operLeftSide,
-                rightSideTemplate: tmp.result,
-                result: sumResult,
-                renameBtnElem: operationsPage.prevBtn,
-                renameBtnName: 'Вернутся к вводу данных',
-                resizeBtnElem: operationsPage.prevBtn,
-                resizeBtnSize: 'big',
-                showBtnsArr: [operationsPage.prevBtn],
-            }).render();
-
-            let resultTable = document.querySelector('.js-result');
-            let firstTableRow = resultTable.firstElementChild;
-
-            Table.create(firstTableRow, numbers, 'afterEnd');
-            paintRows(resultTable);
-
-            function paintRows(parent) {
-                let rows = parent.rows;
-                for (let i = 0; i < rows.length; i++) {
-                    if (rows[i].classList.contains('result')) return;
-
-                    let cells = rows[i].cells;
-                    for (let j = 0; j < cells.length; j++) {
-                        if (!j % 2) continue;
-                        let numCell = Number(cells[j].innerHTML);
-                        if (numCell > 10) {
-                            cells[j].parentNode.classList.add('painted');
-                        }
-                    }
-                }
-            }
+            new ResultStep(operationsPage);
         }
     }
 }
