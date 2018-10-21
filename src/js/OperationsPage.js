@@ -2,7 +2,7 @@ import Page from './Page';
 import operationsTmp from '../hbs/operations.hbs';
 
 export default class OperationsPage extends Page {
-    constructor(options) {
+    constructor(email) {
         super({
             pageTitle: 'Ввод данных',
             template: operationsTmp,
@@ -13,22 +13,15 @@ export default class OperationsPage extends Page {
         this.operFlag = 'dataInput';
         this.numbers = [];
         this.sumResult = 0;
+        this.email = email;
 
         this.render();
+        this.prevBtn = document.querySelector('.js-prevBtn');
+        this.nextBtn = document.querySelector('.js-nextBtn');
     }
 
     addControlHandlers(prevHandler, nextHandler) {
-        this.addPrevBtnHandler(prevHandler);
-        this.addNextBtnHandler(nextHandler);
-    }
-
-    addPrevBtnHandler(handler) {
-        this.prevBtn = document.querySelector('.js-prevBtn');
-        this.prevBtn.addEventListener('click', handler);
-    }
-
-    addNextBtnHandler(handler) {
-        this.nextBtn = document.querySelector('.js-nextBtn');
-        this.nextBtn.addEventListener('click', handler);
+        this.prevBtn.addEventListener('click', prevHandler);
+        this.nextBtn.addEventListener('click', nextHandler);
     }
 }

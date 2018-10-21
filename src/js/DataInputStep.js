@@ -6,7 +6,7 @@ import dataInputTmp from '../hbs/dataInput.hbs';
 export default class DataInputStep extends Step {
     constructor(page) {
         super({
-            //email: loginPage.email,
+            email: page.email,
             stepFlag: 'dataInput',
             leftSideTemplate: operLeftSideTmp,
             rightSideTemplate: dataInputTmp,
@@ -30,8 +30,8 @@ export default class DataInputStep extends Step {
         this.plusBtn = document.querySelector('.js-add');
         this.plusBtn.addEventListener('click', () => {
             let div = document.createElement('div');
-            this._createInput(div);
-            this._createWarning(div);
+            DataInputStep.createInput(div);
+            DataInputStep.createWarning(div);
             this.plusBtn.before(div);
         });
     }
@@ -53,13 +53,13 @@ export default class DataInputStep extends Step {
         });
     }
 
-    _createInput(elem) {
+    static createInput(elem) {
         let input = document.createElement('input');
         input.classList.add('operRightContent__input', 'js-numInput');
         elem.append(input);
     }
 
-    _createWarning(elem) {
+    static createWarning(elem) {
         let div = document.createElement('div');
         div.classList.add('operRightContent__warning');
         elem.append(div);
@@ -68,9 +68,7 @@ export default class DataInputStep extends Step {
     _isCorrectInputs() {
         let isCorrect = true;
         for (let input of this.inputs) {
-            console.log(input);
             let warning = input.nextElementSibling;
-            console.log(warning);
             if (isNaN(input.value) || input.value < 0 || isNotFloat(input.value)) {
                 warning.innerHTML = 'Введите целое положительное число';
                 isCorrect = false;
