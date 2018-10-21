@@ -22,6 +22,7 @@ export default class DataInputStep extends Step {
         this.render();
         this.operRightContent = document.querySelector('.js-operRightContent');
         this.inputs = document.getElementsByClassName('js-numInput');
+        this.inputs[0].focus();
         this.addPlusBtnListener();
         this.addInputsHandler();
     }

@@ -23,14 +23,14 @@ function mainBtnHandler() {
 
         function prevHandler() {
             let addedContent = document.querySelector('.addedContent');
-            Animation.fadeOut(addedContent, function () {
+            Animation.fadeOut(addedContent, () => {
                 renderDataInput();
             });
         }
 
         function nextHandler() {
             let addedContent = document.querySelector('.addedContent');
-            Animation.fadeOut(addedContent, function () {
+            Animation.fadeOut(addedContent, () => {
                 switch (operationsPage.operFlag) {
                     case 'dataInput':
                         renderConfirmData();
@@ -44,26 +44,23 @@ function mainBtnHandler() {
         }
 
         function renderDataInput() {
-            operationsPage.renderTitle('Ввод данных');
-            operationsPage.operFlag = 'dataInput';
+            operationsPage.nextState('dataInput', 'Ввод данных');
             new DataInputStep(operationsPage);
         }
 
         function renderConfirmData() {
-            operationsPage.operFlag = 'confirmData';
-            operationsPage.renderTitle('Подтверждение данных');
+            operationsPage.nextState('confirmData', 'Подтверждение данных');
             new ConfirmDataStep(operationsPage);
         }
 
         function renderCalculation() {
-            operationsPage.renderTitle('Расчет');
+            operationsPage.nextState('calculation', 'Расчет');
             let calculation = new CalculationStep(operationsPage);
             calculation.onNextPage(renderResult, 2000);
         }
 
         function renderResult() {
-            operationsPage.operFlag = 'result';
-            operationsPage.renderTitle('Результат');
+            operationsPage.nextState('result', 'Результат');
             new ResultStep(operationsPage);
         }
     }

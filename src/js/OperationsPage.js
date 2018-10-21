@@ -24,4 +24,9 @@ export default class OperationsPage extends Page {
         this.prevBtn.addEventListener('click', prevHandler);
         this.nextBtn.addEventListener('click', nextHandler);
     }
+
+    nextState(flag, title) {
+        this.operFlag = flag;
+        this.renderTitle(title)
+    }
 }
