@@ -14,9 +14,11 @@ export default class CalculationStep extends Step {
 
         this.page = page;
         page.sumResult = 0;
+    }
 
+    show() {
         this.render();
-        page.sumResult = CalculationStep.calculate(page.numbers);
+        this.page.sumResult = CalculationStep.calculate(this.page.numbers);
     }
 
     onNextPage(handler, ms) {

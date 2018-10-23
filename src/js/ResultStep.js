@@ -17,11 +17,14 @@ export default class ResultStep extends Step {
             resizeBtnSize: 'big',
             showBtnsArr: [page.prevBtn],
         });
+        this.page = page;
+    }
 
+    show() {
         this.render();
         this.resultTable = document.querySelector('.js-result');
         this.firstTableRow = this.resultTable.firstElementChild;
-        Table.create(this.firstTableRow, page.numbers, 'afterEnd');
+        Table.create(this.firstTableRow, this.page.numbers, 'afterEnd');
         ResultStep.paintRows(this.resultTable);
     }
 

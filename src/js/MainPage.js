@@ -1,4 +1,5 @@
 import Page from './Page';
+import LoginPage from './LoginPage';
 import mainTmp from '../hbs/main.hbs';
 
 export default class MainPage extends Page {
@@ -12,12 +13,20 @@ export default class MainPage extends Page {
             ' и сортировать их перед сложением. Попробуйте прямо сейчас!',
             btnName: 'Хочу суммировать',
         });
+    }
 
+    show() {
         this.render();
+        this.mainBtn = document.querySelector('.js-mainContent__btn');
+        this.addBtnListener();
     }
 
-    addBtnListener(listener) {
-        let mainBtn = document.querySelector('.js-mainContent__btn');
-        mainBtn.addEventListener('click', listener);
+    addBtnListener() {
+        this.mainBtn.addEventListener('click', () => {
+            let loginPage = new LoginPage();
+            loginPage.show();
+        });
     }
+
+
 }

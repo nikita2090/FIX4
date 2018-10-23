@@ -1,20 +1,13 @@
 import './scss/styles.scss'
 import './js/handlebars.runtime.js';
 import MainPage from './js/MainPage';
-import LoginPage from './js/LoginPage';
-import OperationsPage from './js/OperationsPage';
-import DataInputStep from './js/DataInputStep';
-import ConfirmDataStep from './js/ConfirmDataStep';
-import CalculationStep from "./js/CalculationStep";
-import ResultStep from "./js/ResultStep";
-import Animation from './js/Animation';
 
 let mainPage = new MainPage();
-mainPage.addBtnListener(mainBtnHandler);
-
+mainPage.show();
+/*
 function mainBtnHandler() {
     let loginPage = new LoginPage();
-    loginPage.addSubmitListener(submitHandler);
+    loginPage.addSubmitListener();
 
     function submitHandler() {
         let operationsPage = new OperationsPage(loginPage.email);
@@ -67,7 +60,7 @@ function mainBtnHandler() {
 }
 
 
-
+*/
 
 
 

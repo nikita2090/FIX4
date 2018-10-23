@@ -18,7 +18,9 @@ export default class DataInputStep extends Step {
             disableBtnsArr: [page.prevBtn, page.nextBtn],
         });
         this.page = page;
+    }
 
+    show() {
         this.render();
         this.operRightContent = document.querySelector('.js-operRightContent');
         this.inputs = document.getElementsByClassName('js-numInput');

@@ -15,12 +15,14 @@ export default class ConfirmDataStep extends Step {
 
         });
         this.page = page;
+    }
 
+    show() {
         this.render();
 
         this.confirmTable = document.querySelector('.js-confirmTable');
-        Table.create(this.confirmTable, page.numbers, 'beforeEnd');
-        this.sortedNumbers = page.numbers.slice();
+        Table.create(this.confirmTable, this.page.numbers, 'beforeEnd');
+        this.sortedNumbers = this.page.numbers.slice();
         this.sortBtn = document.querySelector('.sortBtn');
         this.filterInput = document.querySelector('.js-filter');
         this.filteredNumbers = null;

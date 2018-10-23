@@ -1,4 +1,5 @@
 import Page from './Page';
+import OperationsPage from './OperationsPage';
 import Button from './Button';
 import logInTmp from '../hbs/logIn.hbs';
 
@@ -14,12 +15,15 @@ export default class LoginPage extends Page {
 
         this.email = null;
         this._formHandler = this._formHandler.bind(this);
+    }
 
+    show() {
         this.render();
         this.login = document.querySelector('#name');
         this.password = document.querySelector('#password');
         this.submit = document.querySelector('.logInForm__submit');
         this.addInputListeners();
+        this.addSubmitListener();
     }
 
     addInputListeners() {
@@ -27,8 +31,11 @@ export default class LoginPage extends Page {
         this.password.addEventListener('input', this._formHandler);
     }
 
-    addSubmitListener(handler) {
-        this.submit.addEventListener('click', handler)
+    addSubmitListener() {
+        this.submit.addEventListener('click', () => {
+            let operationsPage = new OperationsPage(this.email);
+            operationsPage.show();
+        })
     }
 
     _formHandler() {
