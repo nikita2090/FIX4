@@ -22,16 +22,16 @@ export default class LoginPage extends Page {
         this.login = document.querySelector('#name');
         this.password = document.querySelector('#password');
         this.submit = document.querySelector('.logInForm__submit');
-        this.addInputListeners();
-        this.addSubmitListener();
+        this._addInputListeners();
+        this._addSubmitListener();
     }
 
-    addInputListeners() {
+    _addInputListeners() {
         this.login.addEventListener('input', this._formHandler);
         this.password.addEventListener('input', this._formHandler);
     }
 
-    addSubmitListener() {
+    _addSubmitListener() {
         this.submit.addEventListener('click', () => {
             let operationsPage = new OperationsPage(this.email);
             operationsPage.show();
@@ -64,6 +64,4 @@ export default class LoginPage extends Page {
         restDomainChars = restDomainChars.replace(/\w/g, '*');
         return nameFirstChar + nameRestChars + atWithFirstChar + restDomainChars + endOfEmail;
     }
-
-
 }

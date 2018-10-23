@@ -18,15 +18,13 @@ export default class MainPage extends Page {
     show() {
         this.render();
         this.mainBtn = document.querySelector('.js-mainContent__btn');
-        this.addBtnListener();
+        this._addBtnListener();
     }
 
-    addBtnListener() {
+    _addBtnListener() {
         this.mainBtn.addEventListener('click', () => {
             let loginPage = new LoginPage();
             loginPage.show();
         });
     }
-
-
 }

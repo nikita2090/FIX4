@@ -27,11 +27,11 @@ export default class ConfirmDataStep extends Step {
         this.filterInput = document.querySelector('.js-filter');
         this.filteredNumbers = null;
 
-        this.addSortBtnHandler();
-        this.addFilterInputHandler();
+        this._addSortBtnHandler();
+        this._addFilterInputHandler();
     }
 
-    addSortBtnHandler() {
+    _addSortBtnHandler() {
         this.sortBtn.addEventListener('click', () => {
             if (this.sortBtn.classList.contains('ByDescending')) {
                 Button.rename(this.sortBtn, 'Данные &#8593;');
@@ -55,7 +55,7 @@ export default class ConfirmDataStep extends Step {
         });
     }
 
-    addFilterInputHandler() {
+    _addFilterInputHandler() {
         this.filterInput.addEventListener('input', () => {
             if (isNaN(this.filterInput.value)) return;
             Table.clean(this.confirmTable);
@@ -63,7 +63,6 @@ export default class ConfirmDataStep extends Step {
                 Table.create(this.confirmTable, this.sortedNumbers, 'beforeEnd');
             } else {
                 this.filteredNumbers = ConfirmDataStep.findNumber(this.filterInput.value, this.page.numbers);
-                console.log(this.filteredNumbers);
                 if (this.filteredNumbers.length === 0) {
                     this.filteredNumbers.push('Ничего не найдено');
                 }

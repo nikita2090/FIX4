@@ -26,11 +26,11 @@ export default class OperationsPage extends Page {
         this.render();
         this.prevBtn = document.querySelector('.js-prevBtn');
         this.nextBtn = document.querySelector('.js-nextBtn');
-        this.addControlHandlers();
+        this._addControlHandlers();
         this.renderDataInput();
     }
 
-    addControlHandlers() {
+    _addControlHandlers() {
         this.prevBtn.addEventListener('click', () => {
             let addedContent = document.querySelector('.addedContent');
             Animation.fadeOut(addedContent, () => {
@@ -79,7 +79,6 @@ export default class OperationsPage extends Page {
     }
 
     renderResult() {
-        console.log(this);
         this.nextState('result', 'Результат');
         let result = new ResultStep(this);
         result.show();

@@ -24,13 +24,13 @@ export default class DataInputStep extends Step {
         this.render();
         this.operRightContent = document.querySelector('.js-operRightContent');
         this.inputs = document.getElementsByClassName('js-numInput');
+        this.plusBtn = document.querySelector('.js-add');
         this.inputs[0].focus();
-        this.addPlusBtnListener();
-        this.addInputsHandler();
+        this._addPlusBtnListener();
+        this._addInputsHandler();
     }
 
-    addPlusBtnListener() {
-        this.plusBtn = document.querySelector('.js-add');
+    _addPlusBtnListener() {
         this.plusBtn.addEventListener('click', () => {
             let div = document.createElement('div');
             DataInputStep.createInput(div);
@@ -39,7 +39,7 @@ export default class DataInputStep extends Step {
         });
     }
 
-    addInputsHandler(){
+    _addInputsHandler(){
         this.operRightContent.addEventListener('input', (e) => {
             if (e.target.classList.contains('js-numInput')) {
                 Button.disable([this.page.nextBtn]);
