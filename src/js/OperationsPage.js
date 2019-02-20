@@ -1,8 +1,5 @@
 import Page from './Page';
 import DataInputStep from './DataInputStep';
-import ConfirmDataStep from './ConfirmDataStep';
-import CalculationStep from './CalculationStep';
-import ResultStep from './ResultStep';
 import Animation from './Animation';
 import operationsTmp from '../hbs/operations.hbs';
 
@@ -65,22 +62,25 @@ export default class OperationsPage extends Page {
         dataInput.show();
     }
 
-    renderConfirmData() {
+    async renderConfirmData() {
         this.nextState('confirmData', 'Подтверждение данных');
-        let confirmData = new ConfirmDataStep(this);
+        let ConfirmDataStep = await import('./ConfirmDataStep');
+        let confirmData = new ConfirmDataStep.default(this);
         confirmData.show();
     }
 
-    renderCalculation() {
+    async renderCalculation() {
         this.nextState('calculation', 'Расчет');
-        let calculation = new CalculationStep(this);
+        let CalculationStep = await import('./CalculationStep');
+        let calculation = new CalculationStep.default(this);
         calculation.show();
         calculation.onNextPage(this.renderResult, 2000);
     }
 
-    renderResult() {
+    async renderResult() {
         this.nextState('result', 'Результат');
-        let result = new ResultStep(this);
+        let ResultStep = await import('./ResultStep');
+        let result = new ResultStep.default(this);
         result.show();
     }
 }

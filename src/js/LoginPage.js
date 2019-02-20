@@ -1,5 +1,4 @@
 import Page from './Page';
-import OperationsPage from './OperationsPage';
 import Button from './Button';
 import logInTmp from '../hbs/logIn.hbs';
 
@@ -32,8 +31,9 @@ export default class LoginPage extends Page {
     }
 
     _addSubmitListener() {
-        this.submit.addEventListener('click', () => {
-            let operationsPage = new OperationsPage(this.email);
+        this.submit.addEventListener('click', async () => {
+            let OperationsPage = await import('./OperationsPage');
+            let operationsPage = new OperationsPage.default(this.email);
             operationsPage.show();
         })
     }
@@ -52,12 +52,12 @@ export default class LoginPage extends Page {
 
         if (this.login.value.search(regEmail) === 0 &&
             this.password.value.search(regPassword) === 0) {
-            this.email = this.login.value.replace(regEmail, this._transformEmail);
-            return true;
+                this.email = this.login.value.replace(regEmail, LoginPage.transformEmail);
+                return true;
         } else return false;
     }
 
-    _transformEmail(_, nameFirstChar, nameRestChars,
+    static transformEmail(_, nameFirstChar, nameRestChars,
                     atWithFirstChar, restDomainChars,
                     endOfEmail) {
         nameFirstChar = nameFirstChar.toUpperCase();

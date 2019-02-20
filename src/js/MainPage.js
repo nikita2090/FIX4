@@ -1,5 +1,4 @@
 import Page from './Page';
-import LoginPage from './LoginPage';
 import mainTmp from '../hbs/main.hbs';
 
 export default class MainPage extends Page {
@@ -22,8 +21,9 @@ export default class MainPage extends Page {
     }
 
     _addBtnListener() {
-        this.mainBtn.addEventListener('click', () => {
-            let loginPage = new LoginPage();
+        this.mainBtn.addEventListener('click', async () => {
+            let LoginPage = await import('./LoginPage');
+            let loginPage = new LoginPage.default();
             loginPage.show();
         });
     }
